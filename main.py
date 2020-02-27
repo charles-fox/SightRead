@@ -13,6 +13,7 @@
 #You should have received a copy of the GNU General Public License
 #along with Sight Read.  If not, see <https://www.gnu.org/licenses/>.
 
+import pdb
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -420,24 +421,22 @@ class MusicGame(Widget):
         self.sound = SoundLoader.load('song.mp3')
         self.sound.play()
 
+    #load the 
     def load_beats(self):
         resultsPresent = False
-        file = open("Timings.txt", "a+")
-        if file.mode == 'a+':
-            contents = file.read().splitlines()
-            for i in contents:
-                try:
-                    self.barGenerator.beatPositions.append(float(i))
-                except:
-                    #Break so doesn't load in previous scores as beat timings
-                    if(i == "Results"):
-                        resultsPresent = True
-                    break
-
-            if(resultsPresent == False):
-                file.write("Results") 
-            file.close()
+        file = open("Timings.txt")
         
+        contents = file.read().splitlines()
+        print(contents)
+
+        for i in contents:
+                self.barGenerator.beatPositions.append(float(i))
+
+        print("beatPositions:")
+        print(self.barGenerator.beatPositions)
+
+
+
      #FIND A WAY TO COMPRESS THIS INTO ONE LINE THAT SUPPORTS MULTIPLE TIME SIGS
     #PURELY FOR TESTING  
     #Maybe use kivy animation?    
